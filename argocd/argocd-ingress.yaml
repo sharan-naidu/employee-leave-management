@@ -4,11 +4,11 @@ metadata:
   name: argocd-ingress
   namespace: argocd
   annotations:
-    alb.ingress.kubernetes.io/group.name: sharan-kubeace
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
-  ingressClassName: alb
+  ingressClassName: nginx
   rules:
     - host: sharan.kubeace.in
       http:
