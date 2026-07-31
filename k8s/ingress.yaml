@@ -4,18 +4,20 @@ metadata:
   name: employee-leave-ingress
   namespace: employee-leave
   annotations:
+    alb.ingress.kubernetes.io/group.name: sharan-kubeace
     alb.ingress.kubernetes.io/scheme: internet-facing
     alb.ingress.kubernetes.io/target-type: ip
+
 spec:
   ingressClassName: alb
   rules:
-    - host: sharan.kubeace.in
-      http:
-        paths:
-          - path: /
-            pathType: Prefix
-            backend:
-              service:
-                name: employee-leave-service
-                port:
-                  number: 80
+  - host: sharan.kubeace.in
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: employee-leave-service
+            port:
+              number: 80
