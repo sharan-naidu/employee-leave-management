@@ -1,0 +1,7 @@
+apiVersion: v2
+name: employee-leave
+description: Helm chart for Employee Leave Management
+type: application
+
+version: 0.1.0
+appVersion: "1.0.0"

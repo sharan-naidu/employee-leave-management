@@ -1,0 +1,30 @@
+replicaCount: 2
+
+image:
+  repository: sharanketon/employee-leave-management
+  tag: v1.0.0
+  pullPolicy: IfNotPresent
+
+container:
+  port: 8000
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8000
+
+ingress:
+  enabled: true
+  className: alb
+  host: sharan.kubeace.in
+  groupName: sharan-kubeace
+  scheme: internet-facing
+  targetType: ip
+
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi

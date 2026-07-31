@@ -9,7 +9,10 @@ spec:
   source:
     repoURL: https://github.com/sharan-naidu/employee-leave-management.git
     targetRevision: main
-    path: k8s
+    path: helm/employee-leave
+    helm:
+      valueFiles:
+        - values.yaml
 
   destination:
     server: https://kubernetes.default.svc
