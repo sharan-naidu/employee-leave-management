@@ -5,11 +5,15 @@ metadata:
   name: employee-leave-ingress
   namespace: {{ .Release.Namespace }}
   annotations:
-    alb.ingress.kubernetes.io/group.name: {{ .Values.ingress.groupName | quote }}
-    alb.ingress.kubernetes.io/scheme: {{ .Values.ingress.scheme | quote }}
-    alb.ingress.kubernetes.io/target-type: {{ .Values.ingress.targetType | quote }}
+    cert-manager.io/cluster-issuer: {{ .Values.ingress.clusterIssuer | quote }}
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
 spec:
   ingressClassName: {{ .Values.ingress.className }}
+  tls:
+    - hosts:
+        - {{ .Values.ingress.host }}
+      secretName: {{ .Values.ingress.tlsSecretName }}
   rules:
     - host: {{ .Values.ingress.host }}
       http:

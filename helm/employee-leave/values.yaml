@@ -15,11 +15,10 @@ service:
 
 ingress:
   enabled: true
-  className: alb
+  className: nginx
   host: sharan.kubeace.in
-  groupName: sharan-kubeace
-  scheme: internet-facing
-  targetType: ip
+  clusterIssuer: letsencrypt-prod
+  tlsSecretName: employee-leave-tls
 
 resources:
   requests:
