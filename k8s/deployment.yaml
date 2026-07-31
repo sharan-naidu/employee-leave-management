@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: employee-leave-app
+  namespace: employee-leave
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: employee-leave-app
+  template:
+    metadata:
+      labels:
+        app: employee-leave-app
+    spec:
+      containers:
+        - name: employee-leave-app
+          image: sharanketon/employee-leave-management:v1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+          readinessProbe:
+            httpGet:
+              path: /ready
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
